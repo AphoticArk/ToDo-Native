@@ -1,0 +1,13 @@
+{
+    "name": "ShieldsToDo",
+    "start_url": "/",
+    "display": "fullscreen",
+    "icons": [
+      {
+        "src": "shield.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ]
+  }
+  

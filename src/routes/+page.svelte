@@ -1,4 +1,7 @@
 <script>
+     // look at svelte transition library 
+     import { crossfade } from 'svelte/transition';
+     import { quintOut } from 'svelte/easing';
      import '../style.css';
      import {writable} from 'svelte/store';
      let todoItem = '';
@@ -72,65 +75,69 @@
           updateDoneList();
           console.log(temp);
      }
-     function pushBack(item, index) {
+     // function pushBack(item, index) {
 
-          temp = item;
-          $finishedList.splice(index, 1);
-          $finishedList = $finishedList;
-          $todoList.push(temp);
-          $todoList = $todoList;
-          updateTaskList();
-          updateDoneList();
-          console.log(temp);
-     }
+     //      temp = item;
+     //      $finishedList.splice(index, 1);
+     //      $finishedList = $finishedList;
+     //      $todoList.push(temp);
+     //      $todoList = $todoList;
+     //      updateTaskList();
+     //      updateDoneList();
+     //      console.log(temp);
+     // }
      function clearDone() {
           $finishedList = $finishedList.filter(item => !item.done)
           updateList();
      }
 </script>
 
-<h1>Todo.</h1>
+<div class="frame"> 
+     <h1>Todo.</h1>
 
-<form on:submit|preventDefault={addToArray}>
-     <input type="text" bind:value={todoItem}>
-     <button type="submit">Add</button>
-</form>
+     <form on:submit|preventDefault={addToArray}>
+          <input type="text" bind:value={todoItem}>
+          <button type="submit">Add</button>
+     </form>
 
-<ul class="notDone">
-     {#each $todoList as item, index}
-          <img class="divide" src="https://riyogames.com/img/ui/rule_of_law.png" alt="">
-          <li>
-               <input type="checkbox" bind:checked={item.done} on:click={() => setTimeout(() => pushThis(item, index), 1000)} >
+     <ul class="notDone">
+          {#each $todoList as item, index}
+               <img class="divide" src="https://riyogames.com/img/ui/rule_of_law.png" alt="">
+               <li>
+                    <input type="checkbox" bind:checked={item.done} on:click={() => setTimeout(() => pushThis(item, index), 0)} >
 
-               <span class:done={item.done}>{item.text}</span>
-               <span on:click={() => removeThisTask(index)} class="remove" role='button' tabindex='0'>&times;</span>
-          </li>
-     {/each}
-</ul>
+                    <span class:done={item.done}>{item.text}</span>
+                    <span on:click={() => removeThisTask(index)} class="remove" role='button' tabindex='0'>&times;</span>
+               </li>
+          {/each}
+     </ul>
 
-{#if isDone.length > 0}
-     <h2>Completed</h2>
-{/if}
+     {#if isDone.length > 0}
+          <h2>Completed</h2>
+     {/if}
 
-<ul class="finishedList">
-     {#each $finishedList as item, index}
-          <img class="divide" src="https://riyogames.com/img/ui/rule_of_law.png" alt="">
-          <li>
-               <!-- <input type="checkbox" checked='false' on:click={() => setTimeout(() => pushBack(item, index), 1000)}> -->
+     <ul class="finishedList">
+          {#each $finishedList as item, index}
+               <img class="divide" src="https://riyogames.com/img/ui/rule_of_law.png" alt="">
+               <li>
+                    <!-- <input type="checkbox" checked='false' on:click={() => setTimeout(() => pushBack(item, index), 1000)}> -->
 
-               <span class:done={item.done}>{item.text}</span>
-               <span on:click={() => removeThisDone(index)} class="remove" role='button' tabindex='0'>&times;</span>
-          </li>
-     {/each}
-</ul>
+                    <span class:done={item.done}>{item.text}</span>
+                    <span on:click={() => removeThisDone(index)} class="remove" role='button' tabindex='0'>&times;</span>
+               </li>
+          {/each}
+     </ul>
 
-{#if isDone.length > 0}
-     <button class='clear' on:click={clearDone}>Remove Done</button>
-{/if}
-
+     {#if isDone.length > 0}
+          <button class='clear' on:click={clearDone}>Remove Done</button>
+     {/if}
+</div>
 <!-- {#if isDone.length > 0} -->
 <style> 
 
+     /* .frame {
+          max-width: 600px;
+     } */
      h1, h2, form, li, span{
           display: flex;
           justify-content: center;
