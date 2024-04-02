@@ -1,3 +1,3 @@
-# my A2 Todo App
+# my Todo App V2 for A3
 
-using Svelte JS to make a simple Todo App
+Updating my simple ToDoApp to work on a phone
