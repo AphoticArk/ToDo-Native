@@ -1,7 +1,7 @@
 <script>
      // look at svelte transition library 
-     import { crossfade } from 'svelte/transition';
-     import { quintOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
      import '../style.css';
      import {writable} from 'svelte/store';
      let todoItem = '';
@@ -103,7 +103,7 @@
      <ul class="notDone">
           {#each $todoList as item, index}
                <img class="divide" src="https://riyogames.com/img/ui/rule_of_law.png" alt="">
-               <li>
+               <li transition:slide={{ duration: 300, easing: quintOut, axis: 'x' }}>
                     <input type="checkbox" bind:checked={item.done} on:click={() => setTimeout(() => pushThis(item, index), 0)} >
 
                     <span class:done={item.done}>{item.text}</span>
@@ -119,9 +119,9 @@
      <ul class="finishedList">
           {#each $finishedList as item, index}
                <img class="divide" src="https://riyogames.com/img/ui/rule_of_law.png" alt="">
-               <li>
-                    <!-- <input type="checkbox" checked='false' on:click={() => setTimeout(() => pushBack(item, index), 1000)}> -->
-
+               <li transition:slide={{ duration: 300, easing: quintOut, axis: 'x' }}>
+                    
+                    <span class="check">&check;</span>
                     <span class:done={item.done}>{item.text}</span>
                     <span on:click={() => removeThisDone(index)} class="remove" role='button' tabindex='0'>&times;</span>
                </li>
@@ -135,33 +135,33 @@
 <!-- {#if isDone.length > 0} -->
 <style> 
 
-     /* .frame {
+     .frame {
           max-width: 600px;
-     } */
+          margin: 4vw auto;
+     }
      h1, h2, form, li, span{
           display: flex;
           justify-content: center;
           color: darkslateblue;
      }
-     .clear {
-          display: flex;
-          justify-content: center !important;
-          margin: auto;
-     }
      ul img {
           display: flex;
           justify-content: center !important;
+          
      }
      h1 {
           font-weight: 700;
           color: midnightblue;
+          font-size: 5em;
      }
      h2 {
-          margin-top: 4vw;
+          margin: 5vw 6.5vw 1.2vw 0;
           color: midnightblue;
+          font-size: 1.8em;
+
      }
      form {
-          margin-top: 3vw;
+          margin-top: 2vw;
           margin-bottom: 4vw;
           font-weight: 400;
      }
@@ -171,17 +171,30 @@
           background-color: skyblue;
           color: darkslateblue;
      }
+     form input[type="text"] {
+          padding: .4em .8em;
+          font-size: 1.2rem;
+          font-family: "Volkhov", serif;
+          border-radius: 7px;
+     }
+     li input[type="checkbox"] {
+          width: 1.75em;
+          height: 1.75em;
+     }
      button {
+          padding: 0em 1.1em;
+          font-size: 1.2rem;
           background-color: royalblue;
-          color:darkblue;
+          color:darkturquoise;
           border-radius: 6px;
      }
      ul {
           list-style: none;
+          margin-right: 10vw;
      }
      li {
-          font-size: 1.3rem;
-          margin-right: 3vw;
+          font-size: 1.5rem;
+          /* margin-right: 10vw; */
           font-weight: 400;
      }
      span {
@@ -196,13 +209,38 @@
      .remove {
           color: #c00;
           cursor: pointer;
+          font-size: 1.2em;
+          margin-left: 2vw;
+     }
+     .notDone {
+          margin-right: 13vw;
      }
      .notDone li {
           color: #000;
           text-decoration: none;
      }
-     .finishedList {
-          color: #aaa;
+     .finishedList .done{
+          color: lightslategray;
+          text-decoration: line-through !important;
+     }
+     .check {
+          background-color: blue;
+          color: whitesmoke;
+          border-radius: 5px;
+          height: min-content;
+          padding: 0 .2em;
+     }
+     .clear {
+          display: flex;
+          justify-content: center !important;
+          margin: auto;
+          margin-top: 2vw;
+          margin-right: 25vw;
+          padding: .3em .9em;
+          font-size: 1.2rem;
+          background-color: royalblue;
+          color:darkturquoise;
+          border-radius: 6px;
      }
 
 </style>
