@@ -155,7 +155,7 @@
           font-size: 5em;
      }
      h2 {
-          margin: 5vw 6.5vw 1.2vw 0;
+          margin: 5vw 2vw 1.2vw 0;
           color: midnightblue;
           font-size: 1.8em;
 
@@ -190,7 +190,7 @@
      }
      ul {
           list-style: none;
-          margin-right: 10vw;
+          margin-right: 5vw;
      }
      li {
           font-size: 1.5rem;
@@ -212,9 +212,6 @@
           font-size: 1.2em;
           margin-left: 2vw;
      }
-     .notDone {
-          margin-right: 13vw;
-     }
      .notDone li {
           color: #000;
           text-decoration: none;
@@ -235,7 +232,6 @@
           justify-content: center !important;
           margin: auto;
           margin-top: 2vw;
-          margin-right: 25vw;
           padding: .3em .9em;
           font-size: 1.2rem;
           background-color: royalblue;
